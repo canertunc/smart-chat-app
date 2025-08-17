@@ -1,0 +1,30 @@
+@model (List<User> users,List<ChatMessage> chatMessages)
+
+
+    <div class="home-first">
+        <div class="home">
+            <div class="home-head">
+                SO, YOU WANT TO TRAVEL TO
+            </div>
+            <div class="main-head">
+                RAG-Based Chatbot
+            </div>
+            <div class="home-explanation">
+                Let's face it, if you want to try RAG-based chatbot,
+                this website is for you. You can upload any PDF files you want and ask questions.
+            </div>
+
+            <div>
+                <a class="btn btn-light custom-btn" asp-controller="Chat" asp-action="Index">Try it</a>
+            </div>
+        </div>
+    </div>
+
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" />
+}
+
+
+

@@ -1,0 +1,186 @@
+@model (List<ChatMessage> chatMessages,string message, List<MessageTime> timeHistory)
+
+
+@* <script>
+    $(".btn-link").click(function () {
+        $("#messageInput").val()
+    })
+</script> *@
+@{
+    var lastQuestion = TempData["Question"] as string;
+    var ragAnswer = TempData["Answer"] as string;
+}
+
+
+
+<div>
+    <section>
+        <div class="container py-5">
+
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-6">
+
+                    <div class="card" id="chat2">
+                        <div class="card-header d-flex justify-content-between align-items-center p-3">
+                            <h5 class="mb-0"><i class="fa-solid fa-dragon fa-sm" style="color: #1d308b;"></i> RAG-Based
+                                Chatbot</h5>
+                            @* <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-sm"
+                            data-mdb-ripple-color="dark">Let's Chat
+                            App</button> *@
+                        </div>
+                        <div id="chatBody" class="card-body"
+                            style="position: relative; height: 440px; overflow-y: auto; overflow-x: hidden;">
+
+
+                            <div class="divider d-flex align-items-center mb-4">
+                                <p class="text-center mx-3 mb-0" style="color: #a2aab7;">Today</p>
+                            </div>
+
+                            @if (Model.chatMessages != null && Model.chatMessages.Any() && Model.timeHistory != null)
+                            {
+                                @foreach (var cm in Model.chatMessages)
+                                {
+                                    var th = Model.timeHistory
+                                    .FirstOrDefault(x => x.MessageId == cm.MessageId);
+                                    <partial name="_MessageCard" model="Tuple.Create(cm, th)" />
+                                }
+                            }
+
+                            <div id="loadingMessage" style="display: none;">
+                                <i class="fa-solid fa-ellipsis fa-bounce fa-lg" style="color: #000000;"></i>
+                            </div>
+
+
+
+                            @* @if (!string.IsNullOrEmpty(lastQuestion) && !string.IsNullOrEmpty(ragAnswer))
+                        {
+                            <div class="d-flex flex-row justify-content-start mb-4">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                                <div>
+                                    <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary">@lastQuestion</p>
+                                    <p class="small ms-3 mb-3 rounded-3 text-muted">@DateTime.Now.ToString()</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                                <div>
+                                    <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">@ragAnswer</p>
+                                    <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">@DateTime.Now.ToString()</p>
+                                </div>
+                                <img src="https://t4.ftcdn.net/jpg/09/43/48/93/360_F_943489384_zq3u5kkefFjPY3liE6t81KrX8W3lvxSz.jpg"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                            </div>
+                        } *@
+
+
+                        </div>
+                        <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3 "
+                            style="position: relative">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                                alt="avatar 3" style="width: 40px; height: 100%;">
+
+
+
+
+                            @if (ViewBag.UploadedFileName != null && ViewBag.UploadedFileName != "")
+                            {
+                                <form id="messageForm" action="/Chat/Ask" method="POST"
+                                    onsubmit="console.log('Form submitting to:', this.action, 'Method:', this.method)">
+                                    <div class="d-flex align-items-center">
+                                        <input type="text" name="message" class="form-control form-control-lg"
+                                            id="messageInput" placeholder="Type message" required>
+
+                                        <a class="ms-3 text-muted" href="#!"><i class="fas fa-smile"></i></a>
+                                        <button value="userMessage" type="submit" class="ms-3 btn btn-link p-0">
+                                            <i class="fas fa-paper-plane text-primary"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <form id="messageForm" action="/Chat/Index" method="POST"
+                                    onsubmit="console.log('Form submitting to:', this.action, 'Method:', this.method)">
+                                    <div class="d-flex align-items-center">
+                                        <input type="text" name="message" class="form-control form-control-lg"
+                                            id="messageInput" placeholder="Type message" required>
+
+                                        <a class="ms-3 text-muted" href="#!"><i class="fas fa-smile"></i></a>
+                                        <button value="userMessage" type="submit" class="ms-3 btn btn-link p-0">
+                                            <i class="fas fa-paper-plane text-primary"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            }
+
+                            <form id="uploadForm" asp-controller="Chat" asp-action="AddFile" method="POST"
+                                enctype="multipart/form-data" style="margin-left: 30px;">
+                                <div class="form-group d-flex align-items-center">
+                                    <input type="file" name="formFile" id="fileInput" style="display:none;" />
+
+                                    <label for="fileInput" style="cursor:pointer;">
+                                        <i class="fas fa-paperclip fa-lg text-muted"></i>
+                                    </label>
+
+                                    <div id="fileInfo" class="ml-2 d-flex align-items-center" style="display:none;">
+                                        <i class="fas fa-file-pdf text-danger"></i>
+                                        <span id="fileName" style="font-size: 14px; margin-left: 5px;"></span>
+                                    </div>
+                                </div>
+                            </form>
+
+                            @if (ViewBag.UploadedFileName != null && ViewBag.UploadedFileName != "")
+                            {
+                                <form id="removeFileForm" action="/Chat/RemoveFile" method="POST">
+                                    <button type="submit" class="ms-3 btn btn-link p-0">
+                                        <i id="removeFile" class="fas fa-times text-muted ms-2"
+                                            style="cursor: pointer; font-size: 12px;" title="Dosyayı kaldır"></i>
+                                    </button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/chat.css" />
+}
+
+@section Scripts {
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var chatBody = document.getElementById("chatBody");
+
+            @if (ViewBag.ScrollToBottom != null && ViewBag.ScrollToBottom == true)
+                {
+                    <text>
+                        chatBody.scrollTop = chatBody.scrollHeight;
+                    </text>
+            }
+
+                @if (ViewBag.UploadedFileName != null && ViewBag.UploadedFileName != "")
+                {
+                    <text>
+                        var fileInfo = document.getElementById("fileInfo");
+                        var fileName = document.getElementById("fileName");
+                        if (fileInfo && fileName) {
+                            fileName.textContent = "@ViewBag.UploadedFileName";
+                        fileInfo.style.display = "inline-flex";
+                                                                }
+                    </text>
+            }
+
+            
+                                });
+    </script>
+    <script src="~/js/file.js"></script>
+    <script src="~/js/chat.js"></script>
+}

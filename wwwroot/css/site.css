@@ -1,0 +1,88 @@
+
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content:end;
+    height: 400px;
+    margin-left: 120px;
+    gap: 20px;
+    padding-top: 500px;
+    width: 800px;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito', sans-serif;
+    font-family: 'Roboto Mono', monospace;
+    
+}
+
+.home-first {
+    background-image: url("./background.png");
+    background-size: 100%;
+    width: auto;
+    height: 838px;
+    color: aliceblue;
+}
+
+.first-chat {
+    background-image: url("./bg2.png");
+    background-size: 100%;
+    width: auto;
+}
+
+.home-head {
+    font-size: 25px;
+}
+
+.main-head {
+    font-size: 75px;
+}
+
+.footer-colour {
+    background-color: black;
+    color: aliceblue;
+}
+
+#chat2 .form-control {
+border-color: transparent;
+}
+
+#chat2 .form-control:focus {
+border-color: transparent;
+box-shadow: inset 0px 0px 0px 1px transparent;
+}
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+
+#chat2 {
+    max-height: 2500px;    /* istediğiniz yükseklik */
+    overflow-y: auto;     /* dikey kaydırma aktif */
+    overflow-x: hidden;   /* yatay kaydırma gizli */
+}
+
+/* Kaydırma çubuğunu özelleştirmek için */
+#chat2::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat2::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#chat2::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+#database_table_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

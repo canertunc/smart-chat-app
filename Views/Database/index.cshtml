@@ -1,0 +1,44 @@
+@model (List<Order> orders, int countNewOrders)
+
+<div>
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-xl-3">
+                <div class="card bg-c-blue order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Orders Table</h6>
+                        <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>@Model.orders.Count()</span></h2>
+                        <p class="m-b-0">Total of Columns<span class="f-right">14</span></p>
+                        <form action="/Database/Orders" method="get">
+                            <button class="btn btn-light">Show Table</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-xl-3">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Order Data</h6>
+                        <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>@Model.orders.Count()</span></h2>
+                        <p class="m-b-0">Total of New Data Sent<span class="f-right">@Model.countNewOrders</span></p>
+                        <form action="/Database/SendOrder" method="get">
+                            <button class="btn btn-light">Send Data</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* <partial name="_OrderCard" /> *@
+    
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/database.css" />
+
+} 

@@ -1,0 +1,21 @@
+@model Tuple<RagBasedChatbot.Models.ChatMessage , RagBasedChatbot.Models.MessageTime>
+
+
+
+<div class="d-flex flex-row justify-content-start mb-4">
+    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+        alt="avatar 1" style="width: 45px; height: 100%;">
+    <div>
+        <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary">@Model.Item1.QuestionMessage</p>
+        <p class="small ms-3 mb-3 rounded-3 text-muted">@Model.Item2.MessageTimeNow.ToString()</p>
+    </div>
+</div>
+
+<div class="d-flex flex-row justify-content-end mb-4 pt-1">
+    <div>
+        <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">@Model.Item1.AnswerMessage</p>
+        <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">@Model.Item2.MessageTimeNow.ToString()</p>
+    </div>
+    <img src="https://t4.ftcdn.net/jpg/09/43/48/93/360_F_943489384_zq3u5kkefFjPY3liE6t81KrX8W3lvxSz.jpg"
+        alt="avatar 1" style="width: 45px; height: 100%;">
+</div>

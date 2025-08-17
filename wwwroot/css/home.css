@@ -1,0 +1,32 @@
+body {
+    background-color: black;
+}
+
+.custom-btn {
+    transition: all 0.3s ease;
+    color: black; 
+    width: 100px;
+    font-weight: 500;
+}
+
+.custom-btn:hover {
+    background-color: black; 
+    color: #f8f9fa;         
+}
+
+.home {
+    animation: slideInLeft 1.5s ease-in-out;
+
+}
+
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
