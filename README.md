@@ -41,6 +41,9 @@ PDF belgelerinizden akıllı sorular sormanızı sağlayan gelişmiş bir chatbo
 
 ### 1. Projeyi Klonlayın
 ```bash
+mkdir RagBasedChatbot
+cd RagBasedChatbot
+
 git clone https://github.com/canertunc/rag-chat-net.git
 ```
 
