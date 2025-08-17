@@ -9,6 +9,7 @@ PDF belgelerinizden akıllı sorular sormanızı sağlayan gelişmiş bir chatbo
 - **AI-Powered Responses**: TinyLlama modeli ile doğal dil cevapları
 - **Semantic Search**: En alakalı bilgileri bulur ve sunar
 - **Statik Soru-Cevap**: PostgreSQL veritabanındaki önceden tanımlanmış sorulara anında cevap
+- **Statik Soru-Cevap Yönetimi**: PostgreSQL veritabanındaki soru-cevap çiftlerini görüntüleme, ekleme ve silme işlemleri
 - **Northwind Database**: Entity Framework ile veri çekme/gönderme işlemleri
 - **Modern Web Arayüzü**: Responsive ve kullanıcı dostu tasarım
 
