@@ -5996,11 +5996,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\caner\\Desktop\\rag-based-chatbot-with-psql\\RagBasedChatbot\\RagBasedChatbot.csproj",
+      "projectUniqueName": "C:\\Users\\caner\\Desktop\\anamoly\\RagBasedChatbot\\RagBasedChatbot.csproj",
       "projectName": "RagBasedChatbot",
-      "projectPath": "C:\\Users\\caner\\Desktop\\rag-based-chatbot-with-psql\\RagBasedChatbot\\RagBasedChatbot.csproj",
+      "projectPath": "C:\\Users\\caner\\Desktop\\anamoly\\RagBasedChatbot\\RagBasedChatbot.csproj",
       "packagesPath": "C:\\Users\\caner\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\caner\\Desktop\\rag-based-chatbot-with-psql\\RagBasedChatbot\\obj\\",
+      "outputPath": "C:\\Users\\caner\\Desktop\\anamoly\\RagBasedChatbot\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\caner\\AppData\\Roaming\\NuGet\\NuGet.Config"

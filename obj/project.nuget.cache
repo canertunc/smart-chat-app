@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Hg2BxlGUKPY=",
+  "dgSpecHash": "nXW2/tlhHyM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\caner\\Desktop\\rag-based-chatbot-with-psql\\RagBasedChatbot\\RagBasedChatbot.csproj",
+  "projectFilePath": "C:\\Users\\caner\\Desktop\\anamoly\\RagBasedChatbot\\RagBasedChatbot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\caner\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\caner\\.nuget\\packages\\itext\\9.2.0\\itext.9.2.0.nupkg.sha512",

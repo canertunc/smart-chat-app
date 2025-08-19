@@ -9,71 +9,39 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RagBasedChatbot
 build_property.RootNamespace = RagBasedChatbot
-build_property.ProjectDir = C:\Users\caner\Desktop\rag-based-chatbot-with-psql\RagBasedChatbot\
+build_property.ProjectDir = C:\Users\caner\Desktop\anamoly\RagBasedChatbot\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\caner\Desktop\rag-based-chatbot-with-psql\RagBasedChatbot
+build_property.MSBuildProjectDirectory = C:\Users\caner\Desktop\anamoly\RagBasedChatbot
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Chatdb/AddMessage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdGRiXEFkZE1lc3NhZ2UuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Chatdb/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdGRiXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Chatdb/_ChatdbCard.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdGRiXF9DaGF0ZGJDYXJkLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Chat/index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxpbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Chat/_MessageCard.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxfTWVzc2FnZUNhcmQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Database/index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YWJhc2VcaW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Database/Orders.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YWJhc2VcT3JkZXJzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Database/SendOrder.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YWJhc2VcU2VuZE9yZGVyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Database/_OrderCard.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YWJhc2VcX09yZGVyQ2FyZC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Home/index.cshtml]
+[C:/Users/caner/Desktop/anamoly/RagBasedChatbot/Views/Home/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxpbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Shared/_Footer.cshtml]
+[C:/Users/caner/Desktop/anamoly/RagBasedChatbot/Views/Home/_MessageCard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfTWVzc2FnZUNhcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/caner/Desktop/anamoly/RagBasedChatbot/Views/Shared/_Footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Shared/_Layout.cshtml]
+[C:/Users/caner/Desktop/anamoly/RagBasedChatbot/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/Shared/_Navbar.cshtml]
+[C:/Users/caner/Desktop/anamoly/RagBasedChatbot/Views/Shared/_Navbar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OYXZiYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/_ViewImports.cshtml]
+[C:/Users/caner/Desktop/anamoly/RagBasedChatbot/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/caner/Desktop/rag-based-chatbot-with-psql/RagBasedChatbot/Views/_ViewStart.cshtml]
+[C:/Users/caner/Desktop/anamoly/RagBasedChatbot/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

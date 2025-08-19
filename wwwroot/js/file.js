@@ -4,7 +4,6 @@ document.getElementById("fileInput").addEventListener("change", function () {
         document.getElementById("fileName").textContent = file.name;
         document.getElementById("fileInfo").style.display = "inline-flex";
 
-        // AJAX
         let formData = new FormData(document.getElementById("uploadForm"));
         fetch('/Chat/AddFile', {
             method: 'POST',

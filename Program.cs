@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using RagBasedChatbot.Data;
-using RagBasedChatbot.Models;
-using RagBasedChatbot.Models.Nothwind;
+// using RagBasedChatbot.Data;
+// using RagBasedChatbot.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,12 +12,6 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddDbContext<NorthwindDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Northwind")));
 
 var app = builder.Build();
 

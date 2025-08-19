@@ -1,135 +1,91 @@
-# 🤖 RAG-Based Chatbot
+# .NET Tabanlı Akıllı Sohbet Uygulaması
 
-PDF belgelerinizden akıllı sorular sormanızı sağlayan gelişmiş bir chatbot uygulaması. Retrieval-Augmented Generation (RAG) teknolojisi kullanarak, yüklediğiniz PDF dosyalarının içeriğinden doğru ve alakalı cevaplar üretir. Ayrıca PostgreSQL veritabanındaki statik soru-cevap çiftleri ile hızlı yanıtlar.
+## 📌 Proje Genel Bakış
+Bu proje, **.NET ekosistemi** kullanarak hem **frontend** hem **backend** geliştirerek, çok yönlü bir **akıllı sohbet uygulaması** oluşturmayı hedefler.  
+Kullanıcılar hem **yazılı** hem **sesli** olarak etkileşime geçebilir ve sistem **API dokümantasyonlarını anlayıp otomatik işlemler yapabilir**.
+Ayrıca, Graph Neural Network (GNN) tabanlı bir öneri sistemi ile kullanıcıya veya şirkete özel tavsiyeler sunar dolayısıyla
+bu sistem, veriler arasındaki ilişkileri graf yapıları üzerinden analiz ederek, daha isabetli ürün, hizmet veya satış stratejisi önerileri üretir.
 
-## ✨ Özellikler
+---
 
-- **PDF Dosya Yükleme**: PDF belgelerinizi kolayca yükleyin
-- **Akıllı Metin Analizi**: Belgeleri otomatik olarak analiz eder ve parçalar
-- **AI-Powered Responses**: TinyLlama modeli ile doğal dil cevapları
-- **Semantic Search**: En alakalı bilgileri bulur ve sunar
-- **Statik Soru-Cevap**: PostgreSQL veritabanındaki önceden tanımlanmış sorulara anında cevap
-- **Northwind Database**: Entity Framework ile veri çekme/gönderme işlemleri
-- **Modern Web Arayüzü**: Responsive ve kullanıcı dostu tasarım
+## 🤖 AI Model Entegrasyonu
 
-## 🛠️ Teknolojiler
+### Model Seçenekleri
+- **Local LLM Modelleri**
+  - Kendi sunucumuzda barındırılan, fine-tune edilebilir modeller (örn. LLaMA, Mistral, Phi-3)
+  - Avantaj: Veri güvenliği yüksek, internet bağımlılığı yok
+- **Bulut Tabanlı API’ler**
+  - OpenAI API (GPT-4o, GPT-4.1 vb.)
+  - Anthropic Claude API
+  - Avantaj: Yüksek doğruluk, sürekli güncel model
 
-### Backend
-- **ASP.NET Core 8.0** - Web framework
-- **Entity Framework Core** - ORM
-- **PostgreSQL** - Veritabanı
-- **iText7** - PDF işleme
+**Çalışma Mantığı:** Burada iki farklı model türünü de uygulayabiliriz veya birini seçebiliriz.
 
-### AI & ML
-- **Python** - Machine Learning işlemleri
-- **Sentence Transformers** - Text embedding (e5-base-v2 modeli)
-- **TinyLlama** - Language model
-- **PyTorch** - Deep learning framework
+---
 
-### Frontend
-- **Bootstrap 5** - UI framework
-- **JavaScript** - İnteraktif özellikler
-- **Font Awesome** - İkonlar
+## 🎙️ Ses ve Metin Desteği
 
-## 🚀 Kurulum
+### Ses İşleme Seçenekleri
+1. **Hazır API Çözümleri**
+   - VAPI, Azure Cognitive Services, Google Speech API
+   - Hızlı geliştirme ve bakım kolaylığı
+2. **Özel .NET Çözümü**
+   - **Text-to-Speech (TTS)**: Model cevabını sesli okuma
+   - **Speech-to-Text (STT)**: Kullanıcı sesini metne çevirme
+   - Tamamen .NET tabanlı, veri güvenliği avantajı
 
-### Gereksinimler
-- .NET 8.0 SDK
-- Python 3.8+
-- PostgreSQL 13+
+**Senaryo:** Kullanıcı konuşur → STT ile metne çevrilir → AI cevap üretir → TTS ile sesli yanıt verilir.
 
-### 1. Projeyi Klonlayın
-```bash
-git clone https://github.com/canertunc/rag-chat-net.git
-```
+---
 
-### 2. Python Sanal Ortamı Kurun
-```bash
-cd Helpers
-python -m venv venv
-venv\Scripts\activate  # Windows
-# source venv/bin/activate  # Linux/Mac
-pip install -r requirements.txt
-```
+## 📚 API Dokümantasyon Uzmanı
 
-### 3. Veritabanını Yapılandırın
-`appsettings.json` dosyasında PostgreSQL bağlantı dizginizi güncelleyin:
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Database=ragchatbot;Username=your_username;Password=your_password"
-  }
-}
-```
+### Ana Özellikler
+- Dokümantasyon analizi: API belgelerini okuyup anlama
+- Endpoint yönetimi: GET, POST, PUT, DELETE metodlarını doğru kullanma
+- Otomatik API çağrıları: "Son 10 siparişi getir" → API çağrısı yapılır
+- MCP Server entegrasyonu: Model Context Protocol ile doğrudan API iletişimi
 
-### 4. Veritabanı Migration'ları Çalıştırın
-```bash
-dotnet ef database update
-```
+**Teknoloji:** .NET backend + MCP client kütüphanesi (MCP serverı baştan kendimiz yazabiliriz protocol kurallarına uymak koşuluyla)
 
-### 5. (Opsiyonel) Statik Soru-Cevap Verilerini Ekleyin
-Statik soru-cevap çiftlerini doğrudan PostgreSQL veritabanına ekleyebilirsiniz:
+---
 
-**A) SQL ile Doğrudan Ekleme:**
-```sql
-INSERT INTO "ChatMessages" ("QuestionMessage", "AnswerMessage") VALUES 
-('Merhaba', 'Merhaba! Size nasıl yardımcı olabilirim?'),
-('Nasılsın', 'Teşekkürler, iyiyim. Siz nasılsınız?'),
-('Bu sistem nasıl çalışıyor', 'Bu sistem RAG teknolojisi kullanarak PDF belgelerinizden sorular cevaplayabilir.');
-```
+## 📊 Akıllı Satış Analizi Sistemi
 
-**B) Projeden Test:**
-- Uygulamayı başlattıktan sonra chat sayfasında yukarıdaki sorulardan birini yazın
-- PDF yüklenmediği için sistem otomatik olarak veritabanından cevap arayacaktır
-- Eğer soru veritabanında varsa, anında hazır cevabı gösterecektir
+**Gerçek Zamanlı Veri Entegrasyonu:**
+  .NET’in asenkron programlama ve SignalR teknolojisi sayesinde, satış ve müşteri verileri farklı kaynaklardan gerçek zamanlı olarak toplanır ve frontend’e hızlıca iletilir.
 
-### 6. (Opsiyonel) Northwind Database Kurulumu
-Eğitim modülü için ayrı bir Northwind veritabanı gereklidir:
-```sql
--- PostgreSQL'de yeni veritabanı oluşturun
-CREATE DATABASE northwind;
--- Northwind schema ve verilerini içe aktarın
--- https://github.com/pthom/northwind_psql adresinden SQL dosyalarını indirip çalıştırın
-```
+**Otomatik Grafik ve Raporlama:**
+  Analiz edilen veriler .NET backend tarafından işlenip JSON formatında frontend’e sunulur. Frontend’de Chart.js veya Plotly ile görselleştirilirken, istenirse .NET grafik kütüphaneleri kullanılarak backend’de raporlar ve PDF çıktıları oluşturulur.
 
-### 7. Uygulamayı Başlatın
-```bash
-dotnet run
-```
+**GNN Tabanlı Öneri Sistemi:**
+  Karmaşık satış verisi ilişkileri Graph Neural Network modelleri ile analiz edilir. Model eğitimi GPU destekli ML altyapılarında gerçekleştirilirken, güncellenen modeller .NET servisleri tarafından API olarak sunulur ve kişiselleştirilmiş öneriler anlık olarak kullanıcıya iletilir.
 
-Uygulama `https://localhost:5001` adresinde çalışacaktır.
+**Haftalık Model Güncellemeleri:**
+  ETL süreçleri ve Azure Data Factory gibi araçlarla hazırlanan veriler, periyodik olarak ML eğitim ortamlarına aktarılır ve model performansı düzenli olarak iyileştirilir.
 
-## 📖 Kullanım
+**Güvenlik ve Kullanıcı Yönetimi:**
+  .NET Identity ve rol tabanlı erişim kontrolleri ile sistem güvenli ve ölçeklenebilir hale getirilir. Kullanıcı bilgileri ve geçmiş performans baz alınarak kişiselleştirilmiş stratejiler oluşturulur.
 
-### 🔄 İki Çalışma Modu
+---
 
-**1. RAG Modu (PDF Tabanlı)**
-1. **PDF Yükleme**: Ana sayfada bulunan 📎 ikonuna tıklayarak PDF dosyanızı yükleyin
-2. **Bekleme**: Dosya işlenirken bekleyin (embedding oluşturma süreci)
-3. **Soru Sorma**: Metin kutusuna PDF içeriği hakkında sorularınızı yazın
-4. **Cevap Alma**: AI, yüklediğiniz belgedeki bilgilere dayalı cevaplar verecektir
+## 🎯 Hedef Kullanım Senaryoları
+1. **API Dokümantasyon Danışmanlığı**
+   - _"Bu API’de kullanıcı verilerini nasıl çekerim?"_
+2. **Anlık Satış Analizi**
+   - _"Bu ayın satış trendlerini grafikle göster"_
+3. **Akıllı Öneriler**
+   - _"Satışlarımı artırmak için ne öneriyorsun?"_
+4. **Otomatik API İşlemleri**
+   - _"Yeni müşteri kaydı oluştur"_
 
-**2. Statik Mod (Veritabanı Tabanlı)**
-- PDF yüklenmediğinde sistem otomatik olarak PostgreSQL veritabanındaki `ChatMessages` tablosunu kontrol eder
-- Önceden tanımlanmış soru-cevap çiftleri varsa bunları kullanır
-- Anında ve hızlı cevaplar için ideal
-- Sık sorulan sorular için önceden hazırlanmış cevaplar
-- **Test için:** Chat arayüzünde "Merhaba", "Nasılsın" gibi basit sorular yazarak test edebilirsiniz
+---
 
-**3. Northwind Database Modülü**
-- Ayrı bir sekmede klasik Northwind veritabanı ile çalışma deneyimi
-- Orders tablosuyla veri gönderme ve çekme işlemleri
-
-## 🔧 Yapılandırma
-
-### Embedding Modeli Değiştirme
-`Helpers/Embeeding.py` dosyasında model adını değiştirebilirsiniz:
-```python
-model = SentenceTransformer("intfloat/e5-base-v2")  # Farklı bir model kullanın
-```
-
-### LLM Modeli Değiştirme
-`Helpers/local_llm.py` dosyasında farklı bir Hugging Face modeli seçebilirsiniz:
-```python
-model_path = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"  # Farklı bir model
-```
+## 🚀 Ekstra Geliştirme Fikirleri
+- **Rol bazlı kullanıcı yönetimi** (Admin, API geliştirici, satış yöneticisi)
+- **Anomali tespiti**
+- **Güvenlik Geliştirmeleri** (Güvenlik kısmı daha detaylı araştırılabilir.)
+  - OpenID Connect (OIDC) ile kurumsal SSO entegrasyonu
+  - JWT + mTLS ile API güvenliği
+  - FIDO2/WebAuthn ile parolasız kimlik doğrulama
+  - Hassas verilerin maskeleme ve şifreleme

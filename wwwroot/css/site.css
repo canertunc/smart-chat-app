@@ -17,7 +17,6 @@
 }
 
 .home-first {
-    background-image: url("./background.png");
     background-size: 100%;
     width: auto;
     height: 838px;
@@ -25,7 +24,6 @@
 }
 
 .first-chat {
-    background-image: url("./bg2.png");
     background-size: 100%;
     width: auto;
 }
