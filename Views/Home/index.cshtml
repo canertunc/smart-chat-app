@@ -5,18 +5,12 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-6">
 
-                    <div class="card" id="chat2">
+                    <div class="" id="chat2">
                         <div class="card-header d-flex justify-content-between align-items-center p-3">
-                            <h5 class="mb-0"><i class="fa-solid fa-dragon fa-sm" style="color: #1d308b;"></i> RAG-Based
-                                Chatbot</h5>
                         </div>
                         <div id="chatBody" class="card-body"
-                            style="position: relative; height: 440px; overflow-y: auto; overflow-x: hidden;">
+                            style="position: relative; height: 450px; overflow-y: auto; overflow-x: hidden;">
 
-
-                            <div class="divider d-flex align-items-center mb-4">
-                                <p class="text-center mx-3 mb-0" style="color: #a2aab7;">Today</p>
-                            </div>
 
                             <div id="loadingMessage" style="display: none;">
                                 <i class="fa-solid fa-ellipsis fa-bounce fa-lg" style="color: #000000;"></i>
@@ -26,17 +20,15 @@
                         </div>
                         <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3 "
                             style="position: relative">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
-                                alt="avatar 3" style="width: 40px; height: 100%;">
 
 
-                            <form id="messageForm" action="/Home" method="GET" @*POST olmalı normalde şuan boş diye böyle!*@
+                            <form id="messageForm" action="/Home" method="GET"
                                 onsubmit="console.log('Form submitting to:', this.action, 'Method:', this.method)">
+                                @*POST olmalı normalde şuan boş diye böyle!*@
                                 <div class="d-flex align-items-center">
-                                    <input type="text" name="message" class="form-control form-control-lg"
-                                        id="messageInput" placeholder="Type message" required>
+                                    <input type="text" name="message" id="messageInput"
+                                        class="form-control custom-input" placeholder="Type message" required>
 
-                                    <a class="ms-3 text-muted" href="#!"><i class="fas fa-smile"></i></a>
                                     <button value="userMessage" type="submit" class="ms-3 btn btn-link p-0">
                                         <i class="fas fa-paper-plane text-primary"></i>
                                     </button>
@@ -67,7 +59,7 @@
                         chatBody.scrollTop = chatBody.scrollHeight;
                     </text>
             }
-                                    });
+                                        });
     </script>
     <script src="~/js/file.js"></script>
     <script src="~/js/chat.js"></script>

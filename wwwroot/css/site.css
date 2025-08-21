@@ -1,45 +1,4 @@
 
-.home {
-    display: flex;
-    flex-direction: column;
-    justify-content:end;
-    height: 400px;
-    margin-left: 120px;
-    gap: 20px;
-    padding-top: 500px;
-    width: 800px;
-    font-family: 'Dosis', sans-serif;
-    font-family: 'Lato', sans-serif;
-    font-family: 'Montserrat', sans-serif;
-    font-family: 'Nunito', sans-serif;
-    font-family: 'Roboto Mono', monospace;
-    
-}
-
-.home-first {
-    background-size: 100%;
-    width: auto;
-    height: 838px;
-    color: aliceblue;
-}
-
-.first-chat {
-    background-size: 100%;
-    width: auto;
-}
-
-.home-head {
-    font-size: 25px;
-}
-
-.main-head {
-    font-size: 75px;
-}
-
-.footer-colour {
-    background-color: black;
-    color: aliceblue;
-}
 
 #chat2 .form-control {
 border-color: transparent;
@@ -59,12 +18,11 @@ background: #eee;
 }
 
 #chat2 {
-    max-height: 2500px;    /* istediğiniz yükseklik */
-    overflow-y: auto;     /* dikey kaydırma aktif */
-    overflow-x: hidden;   /* yatay kaydırma gizli */
+    max-height: 2500px;    
+    overflow-y: auto;    
+    overflow-x: hidden;   
 }
 
-/* Kaydırma çubuğunu özelleştirmek için */
 #chat2::-webkit-scrollbar {
     width: 8px;
 }
@@ -83,4 +41,12 @@ background: #eee;
     justify-content: center;
     align-items: center;
     
+}
+
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    color: aliceblue;
 }

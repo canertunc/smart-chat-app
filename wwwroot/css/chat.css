@@ -1,7 +1,23 @@
 
 body {
-    background-color:azure;
+    background-image: url("./bg_sky.jpg");
     background-size: 100%;
     width: auto;
+    
 
+}
+
+
+
+#messageInput {
+    width: 500px;
+}
+
+.custom-input {
+    width: 100%;     
+    max-width: 600px; 
+    height: 25px;     
+    font-size: 12px; 
+    padding: 5px 10px;
+    margin-left: 30px;
 }

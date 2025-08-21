@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KkDCDuM7fIiQjQpA0yoCl+h2iY9wVjLvOBqVFULJxrE=",
+  "Hash": "pxZXFW0a9QZ/7G5zgQtZiWWSxCNDqLDb6xsJuHLyJCg=",
   "Source": "RagBasedChatbot",
   "BasePath": "_content/RagBasedChatbot",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\caner\\Desktop\\anamoly\\RagBasedChatbot\\wwwroot\\css\\bg_sky.jpg",
+      "SourceId": "RagBasedChatbot",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\caner\\Desktop\\anamoly\\RagBasedChatbot\\wwwroot\\",
+      "BasePath": "_content/RagBasedChatbot",
+      "RelativePath": "css/bg_sky.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\bg_sky.jpg"
+    },
     {
       "Identity": "C:\\Users\\caner\\Desktop\\anamoly\\RagBasedChatbot\\wwwroot\\css\\chat.css",
       "SourceId": "RagBasedChatbot",

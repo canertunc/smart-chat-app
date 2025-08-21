@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\caner\\Desktop\\anamoly\\RagBasedChatbot\\wwwroot\\css\\bg_sky.jpg",
+      "PackagePath": "staticwebassets\\css\\bg_sky.jpg"
+    },
+    {
       "Id": "C:\\Users\\caner\\Desktop\\anamoly\\RagBasedChatbot\\wwwroot\\css\\chat.css",
       "PackagePath": "staticwebassets\\css\\chat.css"
     },
