@@ -1,0 +1,40 @@
+
+body {
+    background-image: url("./bg_sky.jpg");
+    background-size: 100%;
+    width: auto;
+}
+
+
+#userInput {
+    width: 500px;
+}
+
+.custom-input {
+    width: 100%;     
+    max-width: 600px; 
+    height: 25px;     
+    font-size: 12px; 
+    padding: 5px 10px;
+    margin-left: 30px;
+}
+
+
+
+/* #chatBody::-webkit-scrollbar {
+    width: 5px;
+    height: 5px; 
+}
+
+#chatBody::-webkit-scrollbar-thumb {
+    background-color: aliceblue; 
+    border-radius: 5px;
+}
+
+#chatBody::-webkit-scrollbar-thumb:hover {
+    background-color: aliceblue; 
+}
+
+#chatBody::-webkit-scrollbar-track {
+    background-color: black; 
+} */

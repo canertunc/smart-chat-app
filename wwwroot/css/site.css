@@ -1,0 +1,52 @@
+
+
+#chat2 .form-control {
+border-color: transparent;
+}
+
+#chat2 .form-control:focus {
+border-color: transparent;
+box-shadow: inset 0px 0px 0px 1px transparent;
+}
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+
+#chat2 {
+    max-height: 2500px;    
+    overflow-y: auto;    
+    overflow-x: hidden;   
+}
+
+#chat2::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat2::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#chat2::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+#database_table_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    color: aliceblue;
+}

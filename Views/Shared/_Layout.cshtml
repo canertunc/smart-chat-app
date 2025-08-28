@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rag Based Chatbot</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+    @* <link  rel="stylesheet" href="~/lib/datatables-bs5/css/dataTables.bootstrap5.min.css"> *@
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+
+    <header>
+        <partial name="_Navbar" />
+        @RenderSection("Header",false)
+    </header>
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    @* <footer>
+        <partial name="_Footer" />
+        @RenderSection("Footer",false)
+    </footer> *@
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/lib/font-awesome/js/all.min.js"></script>
+    @* <script src="~/lib/datatables/js/dataTables.min.js"></script>
+    <script src="~/lib/datatables-bs5/js/dataTables.bootstrap5.min.js"></script> *@
+
+    
+    @await RenderSectionAsync("Scripts",required: false)
+
+    
+</body>
+</html>
