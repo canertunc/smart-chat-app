@@ -56,6 +56,10 @@
                                 <button id="sendButton" value="userMessage" type="button" class="ms-3 btn btn-link p-0">
                                     <i class="fa-solid fa-paper-plane" style="color: #f0ff80;"></i>
                                 </button>
+
+                                <button id="micButton" type="button" class="ms-2 btn btn-link p-0" title="Konuş">
+                                    <i id="micIcon" class="fa-solid fa-microphone" style="color:#f0ff80;"></i>
+                                </button>
                             </div>
 
                             <div class="btn-group dropend">
@@ -95,16 +99,116 @@
 }
 
 @section Scripts {
+    <script type="module">
+        import { speakSequential, stopCurrent } from "/js/tts.js?v=3"; 
+        /* =======================
+           TTS Yardımcıları (Batch)
+           ======================= */
 
-    <script>
+        const TTS_LANGUAGE = "en";
+
+        // Metni TTS'ye gitmeden sadeleştirilir
+        function sanitizeForTts(s) {
+            return String(s || "")
+                .replace(/[_*`#~>-]+/g, " ")   // markdown işaretleri 
+                .replace(/["“”]+/g, "")
+                .replace(/\[(.*?)\]\((.*?)\)/g, "$1")  // [title](url) → title
+                .replace(/https?:\/\/\S+/g, "")        // URL'leri at
+                .replace(/[^\P{C}\n\r\t]+/gu, " ")     // kontrol karakterleri
+                .replace(/\s+/g, " ")                  // fazla boşluk
+                .trim();
+        }
+
+        // 300 kelimeyi geçince ilk noktalama işaretine (., !, ?, …) kadar uzatılır
+        function chunkForTtsHard(full, maxChars = 520, wordCap = 300) {
+            const text = sanitizeForTts(full);
+            if (!text) return [];
+
+            const out = [];
+            let rest = text.trim();
+
+            while (rest.length) {
+                const words = rest.split(/\s+/);
+                if (words.length <= wordCap) { out.push(rest); break; }
+
+                let candidate = words.slice(0, wordCap).join(" ");
+                let tail = rest.slice(candidate.length);
+
+                // Candidate'ten SONRA ilk noktalama (çok uzaksa zorlamayalım)
+                const punctMatch = tail.match(/^[^.!?…]*[.!?…]/);
+                if (punctMatch && punctMatch[0].length <= 200) {
+                    candidate += tail.slice(0, punctMatch[0].length);
+                } else {
+                    if (candidate.length > maxChars) {
+                        const slice = candidate.slice(0, maxChars);
+                        const cutAt = Math.max(slice.lastIndexOf(" "), 120);
+                        candidate = slice.slice(0, cutAt).trim();
+                    }
+                }
+
+                candidate = candidate.trim();
+                if (!candidate) break;
+                out.push(candidate);
+                rest = rest.slice(candidate.length).trim();
+            }
+
+            const normalized = [];
+            for (const ch of out) {
+                if (ch.length <= maxChars) { normalized.push(ch); continue; }
+                let s = ch;
+                while (s.length > maxChars) {
+                    const slice = s.slice(0, maxChars);
+                    let cutAt = slice.lastIndexOf(" ");
+                    if (cutAt < 120) cutAt = maxChars; // uzun kelimeyse düz kes
+                    normalized.push(slice.slice(0, cutAt).trim());
+                    s = s.slice(cutAt).trim();
+                }
+                if (s) normalized.push(s);
+            }
+            return normalized;
+        }
+
+
+        // Basit oynatma kuyruğu
+        let __ttsQueue = [];
+        let __ttsPlaying = false;
+
+        async function __playQueue() {
+            if (__ttsPlaying) return;
+            __ttsPlaying = true;
+            try {
+                while (__ttsQueue.length > 0) {
+                    const url = __ttsQueue.shift();
+                    await new Promise(res => {
+                        const a = new Audio(url);
+                        a.onended = res; a.onerror = res;
+                        a.play().catch(res);
+                    });
+                }
+            } finally { __ttsPlaying = false; }
+        }
+
+        async function speakChunksSequentially(chunks, opts = { language: TTS_LANGUAGE }) {
+            for (const ch of chunks) {
+                try {
+                    const { speak } = await import("/js/tts.js");
+                    const url = await speak(ch, opts);
+                    if (url) { __ttsQueue.push(url); __playQueue(); }
+                } catch (e) {
+                    console.warn("[TTS] chunk skipped:", e?.message || e);
+                }
+            }
+        }
+
+        /* ================
+           UI yardımcıları
+           ================ */
 
         function escapeHtml(unsafe) {
             if (!unsafe) return "";
             return unsafe.replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/\"/g, "&quot;")
-                .replace(/'/g, "&#039;");
+                .replace(/</g, "&lt;").replace(/>/g, "&gt;")
+                .replace(/\"/g, "&quot;").replace(/'/g, "&#039;");
         }
 
         function addUserMessage(text) {
@@ -112,11 +216,10 @@
             const wrapper = document.createElement("div");
             wrapper.className = "d-flex flex-row justify-content-start mb-4";
             wrapper.innerHTML = `
-                                    <div>
-                                        <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary">${escapeHtml(text)}</p>
-                                        <p class="small ms-3 mb-3 rounded-3 text-muted">${new Date().toLocaleTimeString()}</p>
-                                    </div>
-                                `;
+                                                                <div>
+                                                                  <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary">${escapeHtml(text)}</p>
+                                                                  <p class="small ms-3 mb-3 rounded-3 text-muted">${new Date().toLocaleTimeString()}</p>
+                                                                </div>`;
             chatBody.appendChild(wrapper);
             chatBody.scrollTop = chatBody.scrollHeight;
         }
@@ -126,66 +229,85 @@
             const wrapper = document.createElement("div");
             wrapper.className = "d-flex flex-row justify-content-end mb-4 pt-1";
             wrapper.innerHTML = `
-                                    <div>
-                                        <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary"></p>
-                                        <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">${new Date().toLocaleTimeString()}</p>
-                                    </div>
-                                    <i class="fa-solid fa-sun fa-xl" style="width: 45px; height: 100%;color: #fffdb8;"></i>
-                                `;
+                                                                <div>
+                                                                  <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary"></p>
+                                                                  <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">${new Date().toLocaleTimeString()}</p>
+                                                                </div>
+                                                                <i class="fa-solid fa-sun fa-xl" style="width:45px;height:100%;color:#fffdb8;"></i>`;
             chatBody.appendChild(wrapper);
             chatBody.scrollTop = chatBody.scrollHeight;
-            // the first <p> inside wrapper is the bot text
             return wrapper.querySelector("p");
         }
 
         function appendToBotBubble(text) {
             if (!currentBotTextEl) return;
-            // use textContent to avoid injecting HTML
             currentBotTextEl.textContent += text;
             const chatBody = document.getElementById("chatBody");
             chatBody.scrollTop = chatBody.scrollHeight;
         }
 
-        // SignalR 
+        /* ================
+           SignalR - LLM
+           ================ */
+
         let currentPrompt = "";
         let currentBotTextEl = null;
         let lastAnswer = "";
 
         const connection = new signalR.HubConnectionBuilder()
-            .withUrl("http://localhost:5058/llmHub")
+            .withUrl("/llmHub")
             .build();
+
+        // Stream sırasında TTS kapalı
+        const ENABLE_STREAM_TTS = false;
 
         connection.on("token", function (message) {
             try {
-                if (typeof message === 'string' && message.startsWith("data: ")) message = message.slice(6);
-                const parsed = JSON.parse(message);
-                const text = parsed.choices?.[0]?.text ?? "";
+                if (typeof message === "string" && message.startsWith("data: "))
+                    message = message.slice(6).trim();
+                if (typeof message === "string" && message.trim() === "[DONE]") return;
+
+                const parsed = (typeof message === "string") ? JSON.parse(message) : message;
+                const text = parsed?.choices?.[0]?.text ?? "";
+                if (!text) return;
+
                 lastAnswer += text;
                 appendToBotBubble(text);
+
+                if (ENABLE_STREAM_TTS) {
+                    // pushTokenForTts(text);
+                }
             } catch (e) {
                 console.error("JSON parse hatası (token):", e, message);
             }
         });
 
-        connection.on("completed", function (status) {
-            console.log("Stream tamamlandı", status || "");
-            // send to server to persist in session
+        connection.on("completed", async function (finalOrStatus) {
             try {
-                fetch("/home/saveMessage", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ QuestionMessage: currentPrompt, AnswerMessage: lastAnswer })
-                }).then(r => {
-                    if (!r.ok) console.error("saveMessage başarısız:", r.status);
-                }).catch(err => console.error("saveMessage fetch hatası:", err));
-            } catch (e) {
-                console.error(e);
-            }
+                // ekranda görülen bot balonundaki metin alınır
+                const bubbleText = (currentBotTextEl?.textContent || "").trim();
 
-            // reset state
-            currentPrompt = "";
-            currentBotTextEl = null;
-            lastAnswer = "";
+                // hub’dan gelen son metin
+                const hubText =
+                    (typeof finalOrStatus === "string" && finalOrStatus !== "canceled" && finalOrStatus.trim())
+                        ? finalOrStatus
+                        : (lastAnswer || "");
+
+                // öncelik balon, boşsa hub
+                const toSpeak = bubbleText || hubText;
+                console.log("[TTS] final text len =", (toSpeak || "").length);
+                if (!toSpeak) return;
+
+                stopCurrent();
+
+                await speakSequential(toSpeak, { language: TTS_LANGUAGE });
+            } catch (e) {
+                console.error("[TTS] completed handler error:", e);
+            } finally {
+                currentPrompt = "";
+                currentBotTextEl = null;
+                lastAnswer = "";
+            }
         });
 
         connection.on("error", function (err) {
@@ -200,116 +322,99 @@
                 const prompt = (input.value || "").trim();
                 if (!prompt) return;
 
-                // add user message (left)
                 addUserMessage(prompt);
-
-                // create bot placeholder (right) where stream will be appended
                 currentBotTextEl = createBotBubble();
 
-                // set state for completed handler
                 currentPrompt = prompt;
                 lastAnswer = "";
 
-                // invoke hub method
                 connection.invoke("Generate", prompt, true);
-
-                // clear input
                 input.value = "";
             }
 
             document.getElementById("sendButton").addEventListener("click", sendMessage);
             document.getElementById("userInput").addEventListener("keydown", (e) => {
-                if (e.key === "Enter") {
-                    e.preventDefault();
-                    sendMessage();
-                }
+                if (e.key === "Enter") { e.preventDefault(); sendMessage(); }
             });
-
         }).catch(err => console.error(err.toString()));
 
+        /* ================
+           SignalR - GNN
+           ================ */
+
         const gnnConnection = new signalR.HubConnectionBuilder()
-            .withUrl("http://localhost:5058/gnnHub")
+            .withUrl("/gnnHub")
             .build();
 
         gnnConnection.on("token", function (message) {
             try {
-                // JSON parse et
                 const recommendations = JSON.parse(message);
-
-                // recommendations bir liste olduğu için tek tek işleyebiliriz
                 recommendations.forEach(rec => {
                     const itemId = rec.item_id;
-                    const score = rec.score.toFixed(2); // opsiyonel: 2 basamak
+                    const score = (rec.score ?? 0).toFixed(2);
                     appendToBotBubble(`Item ID: ${itemId}, Score: ${score}`);
                 });
-
             } catch (e) {
                 console.error("JSON parse hatası (token):", e, message);
             }
         });
 
-        gnnConnection.on("completed", function (status) {
-            console.log("Stream tamamlandı", status || "");
-            // send to server to persist in session
-            try {
-                fetch("/home/saveMessage", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ QuestionMessage: currentPrompt, AnswerMessage: lastAnswer })
-                }).then(r => {
-                    if (!r.ok) console.error("saveMessage başarısız:", r.status);
-                }).catch(err => console.error("saveMessage fetch hatası:", err));
-            } catch (e) {
-                console.error(e);
-            }
-
-            // reset state
-            currentPrompt = "";
-            currentBotTextEl = null;
-            lastAnswer = "";
+        gnnConnection.on("completed", function () {
+            console.log("GNN stream tamamlandı");
         });
 
         gnnConnection.on("error", function (err) {
-            console.error("Hub error:", err);
+            console.error("GNN hub error:", err);
         });
 
         gnnConnection.start().then(() => {
-            console.log("SignalR bağlandı");
+            console.log("GNN SignalR bağlandı");
 
-            function sendMessage() {
-                // Input elementlerini seç
+            function sendGnn() {
                 const userIdInput = parseInt((document.getElementById("gnnUserId").value || "").trim(), 10);
                 const kInput = parseInt((document.getElementById("gnnK").value || "").trim(), 10);
+                if (!userIdInput || !kInput) { alert("User ID ve Top K boş olamaz!"); return; }
 
-                // Boş mu kontrol
-                if (!userIdInput || !kInput) {
-                    alert("User ID ve Top K boş olamaz!");
-                    return;
-                }
                 const prompt = `Recommend ${kInput} products for the user with ID ${userIdInput}.`;
-                // add user message (left)
                 addUserMessage(prompt);
-
-                // create bot placeholder (right) where stream will be appended
                 currentBotTextEl = createBotBubble();
 
-                // set state for completed handler
                 currentPrompt = prompt;
                 lastAnswer = "";
 
-                // invoke hub method
                 gnnConnection.invoke("Recommend", userIdInput, kInput);
-
             }
 
-            document.getElementById("gnnButton").addEventListener("click", sendMessage);
-
+            document.getElementById("gnnButton").addEventListener("click", sendGnn);
         }).catch(err => console.error(err.toString()));
 
+        /* ================
+           Mic UI Toggle (Sadece görsel)
+           ================ */
+        (function () {
+            const micBtn = document.getElementById("micButton");
+            const micIcon = document.getElementById("micIcon");
+            let isRecording = false;
 
+            function setMicState(rec) {
+                isRecording = rec;
+                if (rec) {
+                    micIcon.classList.remove("fa-microphone");
+                    micIcon.classList.add("fa-stop");
+                    micIcon.style.filter = "drop-shadow(0 0 4px #ff6b6b)";
+                } else {
+                    micIcon.classList.remove("fa-stop");
+                    micIcon.classList.add("fa-microphone");
+                    micIcon.style.filter = "";
+                }
+            }
 
-
+            micBtn.addEventListener("click", () => {
+                setMicState(!isRecording);
+                console.log(isRecording ? "Mic: REC" : "Mic: STOP");
+            });
+        })();
     </script>
-    @* <script src="~/js/file.js"></script>
-    <script src="~/js/chat.js"></script> *@
+
+    <script src="/js/voice.js"></script>
 }

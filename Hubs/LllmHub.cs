@@ -54,7 +54,7 @@ public class LlmHub : Hub
             var http = _httpClientFactory.CreateClient("LlmClient");
             http.Timeout = Timeout.InfiniteTimeSpan; // stream sonsuz akabileceği için timeout yok
 
-        
+
 
 
 
@@ -78,6 +78,9 @@ public class LlmHub : Hub
             using var reader = new StreamReader(stream, Encoding.UTF8);
 
             string? line;
+
+            var fullResponse = new StringBuilder();
+
             // LLM'den gelen satırları tek tek oku
             while ((line = await reader.ReadLineAsync()) is not null && !cts.Token.IsCancellationRequested)
             {
@@ -93,8 +96,9 @@ public class LlmHub : Hub
                     {
                         var token = respText.GetString();
                         if (!string.IsNullOrEmpty(token))
-                            // Token'i anında client'a gönder
-                            await Clients.Caller.SendAsync("token", token);
+                            fullResponse.Append(token); // tüm cevabı ekle
+                                                        // Token'i anında client'a gönder
+                        await Clients.Caller.SendAsync("token", token);
                     }
 
                     // "done": true geldiyse stream bitmiştir -> döngüden çık
@@ -103,13 +107,15 @@ public class LlmHub : Hub
                 }
                 catch
                 {
+                    fullResponse.Append(line);
                     // JSON parse edilemezse düz metin olarak gönder
                     await Clients.Caller.SendAsync("token", line);
                 }
             }
 
-            // İstemciye işin bittiğini bildir
-            await Clients.Caller.SendAsync("completed");
+            // iş bittiğinde
+            await Clients.Caller.SendAsync("completed", fullResponse.ToString());
+
         }
         catch (OperationCanceledException)
         {

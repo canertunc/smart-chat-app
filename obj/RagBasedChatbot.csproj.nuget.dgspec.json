@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\caner\\Desktop\\RagBasedChatbot\\RagBasedChatbot.csproj": {}
+    "C:\\Users\\PC\\Documents\\GitHub\\smart-chat-app2\\RagBasedChatbot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\caner\\Desktop\\RagBasedChatbot\\RagBasedChatbot.csproj": {
+    "C:\\Users\\PC\\Documents\\GitHub\\smart-chat-app2\\RagBasedChatbot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\caner\\Desktop\\RagBasedChatbot\\RagBasedChatbot.csproj",
+        "projectUniqueName": "C:\\Users\\PC\\Documents\\GitHub\\smart-chat-app2\\RagBasedChatbot.csproj",
         "projectName": "RagBasedChatbot",
-        "projectPath": "C:\\Users\\caner\\Desktop\\RagBasedChatbot\\RagBasedChatbot.csproj",
-        "packagesPath": "C:\\Users\\caner\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\caner\\Desktop\\RagBasedChatbot\\obj\\",
+        "projectPath": "C:\\Users\\PC\\Documents\\GitHub\\smart-chat-app2\\RagBasedChatbot.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC\\Documents\\GitHub\\smart-chat-app2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\caner\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
