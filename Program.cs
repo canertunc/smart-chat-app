@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.Features;
+using RagBasedChatbot.Helpers;  
 // using RagBasedChatbot.Data;
 // using RagBasedChatbot.Models;
 
@@ -14,7 +16,24 @@ builder.Services.AddHttpClient("GnnClient");
 
 builder.Services.Configure<LlmOptions>(builder.Configuration.GetSection("Llm"));
 
-// builder.Services.AddHttpClient();
+builder.Services.AddHttpClient();
+
+// ADDED: Audio upload'lar için makul boyut limitleri
+builder.Services.Configure<FormOptions>(o =>
+{
+    o.MultipartBodyLengthLimit = 100 * 1024 * 1024; // 100 MB
+});
+
+builder.WebHost.ConfigureKestrel(o =>
+{
+    o.Limits.MaxRequestBodySize = 100 * 1024 * 1024; // 100 MB
+});
+
+var ffmpegPath = builder.Configuration["Ffmpeg:Path"];
+if (!string.IsNullOrWhiteSpace(ffmpegPath))
+{
+    FfmpegConvert.OverridePath = ffmpegPath;
+}
 
 builder.Services.AddSession(options =>
 {

@@ -11,7 +11,6 @@ body {
 }
 
 .custom-input {
-    width: 100%;     
     max-width: 600px; 
     height: 25px;     
     font-size: 12px; 
@@ -21,8 +20,8 @@ body {
 
 
 
-/* #chatBody::-webkit-scrollbar {
-    width: 5px;
+#chatBody::-webkit-scrollbar {
+    width: 7px;
     height: 5px; 
 }
 
@@ -36,5 +35,5 @@ body {
 }
 
 #chatBody::-webkit-scrollbar-track {
-    background-color: black; 
-} */
+    background-color: rgba(0, 0, 0, 0);
+}

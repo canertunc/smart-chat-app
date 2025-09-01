@@ -78,6 +78,7 @@ public class LlmHub : Hub
             using var reader = new StreamReader(stream, Encoding.UTF8);
 
             string? line;
+            var fullResponse = new StringBuilder();
             // LLM'den gelen satırları tek tek oku
             while ((line = await reader.ReadLineAsync()) is not null && !cts.Token.IsCancellationRequested)
             {
@@ -103,6 +104,7 @@ public class LlmHub : Hub
                 }
                 catch
                 {
+                    fullResponse.Append(line);
                     // JSON parse edilemezse düz metin olarak gönder
                     await Clients.Caller.SendAsync("token", line);
                 }

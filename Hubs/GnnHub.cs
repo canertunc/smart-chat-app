@@ -4,7 +4,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 
-// SignalR Hub sınıfı: Client ile LLM arasındaki köprü
+// SignalR Hub sınıfı: Client ile GNN arasındaki köprü
 public class GnnHub : Hub
 {
     private readonly IHttpClientFactory _httpClientFactory;
@@ -115,7 +115,7 @@ public class GnnHub : Hub
         }
     }
 
-    // İstemci bu metodu çağırırsa → iptal işlemi tetiklenir
+    // İstemci bu metodu çağırırsa iptal işlemi tetiklenir
     public Task Cancel()
     {
         if (_ctsMap.TryRemove(Context.ConnectionId, out var cts))

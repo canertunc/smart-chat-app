@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\chat.css"
     },
     {
+      "Id": "C:\\Users\\caner\\Desktop\\RagBasedChatbot\\wwwroot\\css\\favicon-32x32.png",
+      "PackagePath": "staticwebassets\\css\\favicon-32x32.png"
+    },
+    {
       "Id": "C:\\Users\\caner\\Desktop\\RagBasedChatbot\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -23,6 +27,14 @@
     {
       "Id": "C:\\Users\\caner\\Desktop\\RagBasedChatbot\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\caner\\Desktop\\RagBasedChatbot\\wwwroot\\js\\tts.js",
+      "PackagePath": "staticwebassets\\js\\tts.js"
+    },
+    {
+      "Id": "C:\\Users\\caner\\Desktop\\RagBasedChatbot\\wwwroot\\js\\voice.js",
+      "PackagePath": "staticwebassets\\js\\voice.js"
     },
     {
       "Id": "C:\\Users\\caner\\Desktop\\RagBasedChatbot\\wwwroot\\lib\\bootstrap\\css\\bootstrap-grid.css",

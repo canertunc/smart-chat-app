@@ -402,6 +402,7 @@ C:\Users\caner\Desktop\RagBasedChatbot\obj\Debug\net8.0\RagBasedChatbot.csproj.C
 C:\Users\caner\Desktop\RagBasedChatbot\obj\Debug\net8.0\RagBasedChatbot.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\caner\Desktop\RagBasedChatbot\obj\Debug\net8.0\RagBasedChatbot.RazorAssemblyInfo.cache
 C:\Users\caner\Desktop\RagBasedChatbot\obj\Debug\net8.0\RagBasedChatbot.RazorAssemblyInfo.cs
+C:\Users\caner\Desktop\RagBasedChatbot\obj\Debug\net8.0\RagBasedChatbot.sourcelink.json
 C:\Users\caner\Desktop\RagBasedChatbot\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\caner\Desktop\RagBasedChatbot\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\caner\Desktop\RagBasedChatbot\obj\Debug\net8.0\staticwebassets\msbuild.RagBasedChatbot.Microsoft.AspNetCore.StaticWebAssets.props

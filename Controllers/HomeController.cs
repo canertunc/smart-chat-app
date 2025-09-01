@@ -4,8 +4,6 @@ using System.Text;
 using RagBasedChatbot.Models;
 using RagBasedChatbot.Helpers;
 
-
-
 namespace RagBasedChatbot.Controllers
 {
     public class HomeController : Controller
@@ -16,7 +14,6 @@ namespace RagBasedChatbot.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
-
 
         [HttpGet]
         public IActionResult Index()
@@ -29,16 +26,13 @@ namespace RagBasedChatbot.Controllers
             return View(messages);
         }
 
-
-
-
         [HttpPost("saveMessage")]
         public IActionResult SaveMessage([FromBody] ChatMessage message)
         {
             // Mevcut session’daki mesaj listesi
             var messages = HttpContext.Session.GetObject<List<ChatMessage>>("ChatMessages") ?? new List<ChatMessage>();
 
-            // Yeni mesajı ekle
+            // Yeni mesaj
             message.Timestamp = DateTime.Now;
             messages.Add(message);
 
